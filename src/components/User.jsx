@@ -13,6 +13,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Avatar from '@mui/material/Avatar';
 import { useState , useEffect} from 'react';
+import Link from '@mui/material/Link';
 
 
 function createData(name, calories, fat, carbs, protein) {
@@ -29,6 +30,7 @@ const rows = [
 
 
 export default function Users() {
+  
   const [items , setItems ] = useState([])
 
   useEffect(() => {
@@ -54,8 +56,11 @@ export default function Users() {
               </Box>
 
               <Box>
-                <Button variant='contained'>Create</Button>
+                <Link href='create'>
+                  <Button variant='contained'>Create</Button>
+                </Link>
               </Box>
+              
           </Box>
 
           <TableContainer component={Paper}>
@@ -63,27 +68,30 @@ export default function Users() {
               <TableHead>
                 <TableRow>
                   <TableCell>ID</TableCell>
-                  <TableCell align="right">Avatar</TableCell>
-                  <TableCell align="right">First Name</TableCell>
-                  <TableCell align="right">Last Name</TableCell>
-                  <TableCell align="right">Username</TableCell>
-                  <TableCell align="right">Action</TableCell>
+                  <TableCell align="center">Avatar</TableCell>
+                  <TableCell align="center">First Name</TableCell>
+                  <TableCell align="center">Last Name</TableCell>
+                  <TableCell align="center">Username</TableCell>
+                  <TableCell align="center">Action</TableCell>
                 </TableRow>
               </TableHead>
             <TableBody>
               {items.map((row) => (
-                <TableRow
-                  key={row.id}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    {row.id}
-                  </TableCell>
-                  <Avatar alt={row.username} src={row.avatar} />
-                  {/* <TableCell align="right">{row.avatar}</TableCell> */}
-                  <TableCell align="right">{row.fname}</TableCell>
-                  <TableCell align="right">{row.lname}</TableCell>
-                  <TableCell align="right">{row.username}</TableCell>
+                <TableRow key={row.id} sx={{ '&:last-child td, &:last-child th': {border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      {row.id}
+                    </TableCell>
+                    
+                    <TableCell align="center">
+                      <Box display="flex" justifyContent="center">
+                          <Avatar alt={row.username} src={row.avatar}/>
+                      </Box>
+                      </TableCell>
+                    <TableCell align="center">{row.fname}</TableCell>
+                    <TableCell align="center">{row.lname}</TableCell>
+                    <TableCell align="center">{row.username}</TableCell>
+                    <TableCell align="center">{row.username}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
