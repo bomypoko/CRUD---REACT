@@ -91,7 +91,7 @@ export default function Users() {
                     <TableCell align="center">{row.fname}</TableCell>
                     <TableCell align="center">{row.lname}</TableCell>
                     <TableCell align="center">{row.username}</TableCell>
-                    <TableCell align="center">{row.username}</TableCell>
+                    <TableCell align="center">{row.action}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

@@ -1,6 +1,6 @@
 import  React , { useState , useEffect} from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
-import Box from '@mui/material/Box';
+
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography'
 import { Grid, TextField, Button } from '@mui/material';
@@ -14,6 +14,38 @@ export default function UserCreate() {
   const [ email , setEmail ] = useState('')
   const [ avatar , setAvatar ] = useState('')
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+      "fname": fname,
+      "lname": lname,
+      "username": username,
+      "password": "1234",
+      "email": email,
+      "avatar": avatar
+    });
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+
+fetch("https://www.melivecode.com/api/users/create", requestOptions)
+  .then(response => response.json())
+  .then(result => {
+    alert(result['message'])
+    if(result['status'] === 'ok') {
+        window.location.href = '/'
+    }
+  })
+  .catch(error => console.log('error', error));
+
+  }
 
 
   return (
@@ -23,7 +55,7 @@ export default function UserCreate() {
         <Typography variant="h6" gutterBottom component="div">
                     Create User
         </Typography>
-        <form>
+        <form onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12} >
               <TextField 
@@ -74,7 +106,7 @@ export default function UserCreate() {
             </Grid>
             <Grid item xs={12}>
 
-              <Button variant="contained" fullWidth color="primary">
+              <Button type='submit' variant="contained" fullWidth color="primary">
                 Create
               </Button>
               
