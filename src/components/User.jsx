@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper'
-import { Button } from '@mui/material';
+import { Button, ButtonGroup } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -91,7 +91,17 @@ export default function Users() {
                     <TableCell align="center">{row.fname}</TableCell>
                     <TableCell align="center">{row.lname}</TableCell>
                     <TableCell align="center">{row.username}</TableCell>
-                    <TableCell align="center">{row.action}</TableCell>
+                    <TableCell align="center">
+                      
+                        <ButtonGroup variant='outlined' aria-label="outlined button group">
+                          <Button>Edit</Button>
+                          <Button>delete</Button>
+                        </ButtonGroup>
+              
+                    </TableCell>
+
+                    
+                  
                 </TableRow>
               ))}
             </TableBody>
