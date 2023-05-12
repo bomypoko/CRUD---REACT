@@ -5,6 +5,7 @@ import './App.css'
 import Navbar from './components/Navbar'
 import Users from './components/User'
 import UserCreate from './components/UserCreate'
+import UserUpdate from './components/UserUpdate'
 
 
 
@@ -19,6 +20,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Users/>} />
         <Route path="create" element={<UserCreate/>}/>
+        <Route path="update/:id" element={<UserUpdate/>}/>
       </Routes>
 
       

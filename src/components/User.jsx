@@ -16,17 +16,8 @@ import { useState , useEffect} from 'react';
 import Link from '@mui/material/Link';
 
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
 
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
+
 
 
 export default function Users() {
@@ -34,14 +25,50 @@ export default function Users() {
   const [items , setItems ] = useState([])
 
   useEffect(() => {
-    fetch("https://www.melivecode.com/api/users")
-      .then(res => res.json())
-      .then(
-        (result) => {
-          setItems(result);
-        }
-      )
+    UserGet()
   }, [])
+
+  const UserGet = () => {
+    fetch("https://www.melivecode.com/api/users")
+    .then(res => res.json())
+    .then(
+      (result) => {
+        setItems(result);
+      }
+    )
+  }
+
+
+  const UserDelete = id => {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+  
+    var raw = JSON.stringify({
+    "id": id
+  });
+  
+  var requestOptions = {
+    method: 'DELETE',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+  };
+  
+    fetch("https://www.melivecode.com/api/users/delete", requestOptions)
+      .then(response => response.json())
+      .then(result => {
+        alert(result['message'])
+       if (result['status' === 'ok']) {
+        UserGet()
+       }
+        
+      })
+      .catch(error => console.log('error', error));
+  }
+  
+  const UserEdit = id => {
+    window.location = '/update/'+id
+  }
 
   return (
     <React.Fragment>
@@ -94,8 +121,8 @@ export default function Users() {
                     <TableCell align="center">
                       
                         <ButtonGroup variant='outlined' aria-label="outlined button group">
-                          <Button>Edit</Button>
-                          <Button>delete</Button>
+                          <Button onClick={() => UserEdit()}>Edit</Button>
+                          <Button onClick={() => UserDelete(row.id)}>delete</Button>
                         </ButtonGroup>
               
                     </TableCell>
