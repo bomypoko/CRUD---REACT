@@ -67,7 +67,7 @@ export default function Users() {
   }
   
   const UserEdit = id => {
-    window.location = '/update/'+id
+    window.location = '/update/' + id
   }
 
   return (

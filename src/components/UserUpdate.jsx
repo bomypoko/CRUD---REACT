@@ -44,6 +44,7 @@ export default function UserUpdate() {
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
+      "id" : id,
       "fname": fname,
       "lname": lname,
       "username": username,
@@ -53,7 +54,7 @@ export default function UserUpdate() {
     });
 
     var requestOptions = {
-      "id" : id,
+      
       method: 'PUT',
       headers: myHeaders,
       body: raw,
